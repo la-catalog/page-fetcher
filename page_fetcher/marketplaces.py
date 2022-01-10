@@ -1,7 +1,7 @@
 from page_fetcher.exceptions import UnknowMarketplaceError
 
 
-class MarketplaceOptions:
+class Marketplaces:
     def __init__(self):
         self._options = {}
 
