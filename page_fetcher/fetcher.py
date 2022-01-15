@@ -1,5 +1,5 @@
+from page_fetcher.options import Options
 from page_fetcher.exceptions import TooManyRequestsError, NotFoundError
-from page_fetcher.marketplaces import Marketplaces
 
 class Fetcher:
     def __init__(self, logger):
@@ -17,11 +17,11 @@ class Fetcher:
             raise
     
     def _fetch(self, url : str, marketplace : str, *args, **kwargs) -> str:
-        marketplace = Marketplaces.get(marketplace)
+        marketplace = Options.get(marketplace)
         return marketplace.fetch(url, *args, **kwargs)
     
     def _cooldown(self, marketplace : str) -> None:
-        marketplace = Marketplaces.get(marketplace)
+        marketplace = Options.get(marketplace)
         marketplace.cooldown()
     
     def _log_too_many_requests(self, url : str, marketplace : str) -> None:
