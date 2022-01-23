@@ -1,3 +1,4 @@
+accept-encoding-gen==0.0.1
 accept-gen==0.0.1
 black==21.12b0
 certifi==2021.10.8
