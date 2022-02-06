@@ -10,7 +10,7 @@ class Fetcher:
 
     @catch(NotFoundError, log_not_found)
     @catch(TooManyRequestsError, log_too_many_requests)
-    def fetch(self, url: str, marketplace: str, *args, **kwargs) -> str:
+    def fetch(self, url: str, marketplace: str, *args, **kwargs) -> list:
         marketplace_fetcher = get_marketplace_fetcher(marketplace)
         return marketplace_fetcher.fetch(url, *args, **kwargs)
 
