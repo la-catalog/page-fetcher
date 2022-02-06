@@ -20,5 +20,9 @@ setup(
     keywords="web, scraper, crawler",
     license="MIT",
     packages=find_packages(exclude=["tests"]),
+    install_requires=[
+        "la-catch>=0.0.3",
+        "playwright>=1.18.2"
+    ]
     python_requires=">=3.10",
 )
