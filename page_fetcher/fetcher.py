@@ -1,6 +1,7 @@
 from typing import Iterator
 from la_catch import catch
-from page_fetcher.logs import *
+
+from page_fetcher.logs import log_error, log_not_found, log_too_many_requests
 from page_fetcher.options import get_marketplace_fetcher
 from page_fetcher.exceptions import TooManyRequestsError, NotFoundError
 from page_fetcher.abstractions import FetcherAbstraction

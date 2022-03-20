@@ -1,5 +1,7 @@
 from typing import Iterator
 
+from page_fetcher.exceptions import NotFoundError, TooManyRequestsError
+
 
 class Marketplace:
     """
@@ -7,9 +9,7 @@ class Marketplace:
     """
 
     def fetch(self, urls: list[str]) -> Iterator[str]:
-        """
-        Navegate through urls to return the contents which are intresting to us.
-        """
+        """Navegate through urls to return the contents which are intresting to us."""
 
         return iter([])
 
@@ -20,6 +20,14 @@ class Marketplace:
         """
 
         pass
+
+    def _raise_for_status(self, status) -> None:
+        """React appropriately to specifics responses status."""
+
+        if status is 429:
+            raise TooManyRequestsError()
+        elif status is 404:
+            raise NotFoundError()
 
 
 class FetcherAbstraction:
