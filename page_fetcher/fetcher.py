@@ -8,10 +8,11 @@ from page_fetcher.abstractions import FetcherAbstraction
 class Fetcher(FetcherAbstraction):
     @catch(NotFoundError, log_not_found)
     @catch(TooManyRequestsError, log_too_many_requests)
-    def fetch(self, urls: list[str], marketplace: str) -> list[str]:
-        marketplace_fetcher = get_marketplace_fetcher(marketplace)
-        return marketplace_fetcher.fetch(urls)
+    async def fetch(self, urls: list[str], marketplace: str) -> list[str]:
+        fetcher = get_marketplace_fetcher(marketplace)
+        contents = await fetcher.fetch(urls)
+        return contents
 
-    def cooldown(self, marketplace: str) -> None:
-        marketplace_fetcher = get_marketplace_fetcher(marketplace)
-        marketplace_fetcher.cooldown()
+    async def cooldown(self, marketplace: str) -> None:
+        fetcher = get_marketplace_fetcher(marketplace)
+        await fetcher.cooldown()

@@ -1,4 +1,4 @@
-class MarketplaceAbstraction:
+class Marketplace:
     """
     Base class for the marketplaces classes.
     """
@@ -32,15 +32,11 @@ class FetcherAbstraction:
         self.logger = logger
 
     def fetch(self, urls: list[str], marketplace: str) -> list[str]:
-        """
-        Pick the expected marketplace fetcher to call the fetch function.
-        """
+        """Pick the expected marketplace fetcher to call the fetch function."""
 
         return []
 
     def cooldown(self) -> None:
-        """
-        Pick the expected marketplace fetcher to call the cooldown function.
-        """
+        """Pick the expected marketplace fetcher to call the cooldown function."""
 
         pass

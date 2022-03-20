@@ -1,11 +1,16 @@
 import os
-from page_fetcher.abstractions import MarketplaceAbstraction
+import asyncio
+from page_fetcher.abstractions import Marketplace
 
 
-class GoogleShopping(MarketplaceAbstraction):
+class GoogleShopping(Marketplace):
     def __init__(self):
-        os.system("playwright install")
-        os.system("playwright install-deps")
-
-    def fetch(self, url: str) -> list:
         pass
+
+    async def fetch(self, urls: list[str]) -> list[str]:
+        return []
+
+    async def cooldown(self) -> None:
+        print("Google Shopping: cooldown start")
+        await asyncio.sleep(5)
+        print("Google Shopping: cooldown end")
