@@ -1,14 +1,17 @@
+from typing import Iterator
+
+
 class Marketplace:
     """
     Base class for the marketplaces classes.
     """
 
-    def fetch(self, urls: list[str]) -> list[str]:
+    def fetch(self, urls: list[str]) -> Iterator[str]:
         """
         Navegate through urls to return the contents which are intresting to us.
         """
 
-        return []
+        return iter([])
 
     def cooldown(self) -> None:
         """
@@ -31,10 +34,10 @@ class FetcherAbstraction:
     def __init__(self, logger):
         self.logger = logger
 
-    def fetch(self, urls: list[str], marketplace: str) -> list[str]:
+    def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         """Pick the expected marketplace fetcher to call the fetch function."""
 
-        return []
+        return iter([])
 
     def cooldown(self) -> None:
         """Pick the expected marketplace fetcher to call the cooldown function."""

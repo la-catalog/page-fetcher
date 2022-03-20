@@ -28,4 +28,19 @@ def log_not_found(
         exception=exception,
     )
 
+    return
+
+
+def log_error(
+    fetcher: FetcherAbstraction, url: str, marketplace: str, exception: Exception
+) -> None:
+    ignored_exceptions = (TooManyRequestsError, StopIteration)
+
+    if not isinstance(exception, ignored_exceptions):
+        fetcher.logger.info(
+            message="Fetcher error",
+            data={"url": url, "marketplace": marketplace},
+            exception=exception,
+        )
+
     raise
