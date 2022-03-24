@@ -8,7 +8,7 @@ def log_too_many_requests(
     marketplace: str,
     exception: TooManyRequestsError,
 ) -> None:
-    fetcher._logger.info(
+    fetcher.logger.info(
         message="Too many requests",
         data={"lib": "page_fetcher", "url": url, "marketplace": marketplace},
         exception=exception,
@@ -22,7 +22,7 @@ def log_too_many_requests(
 def log_not_found(
     fetcher: FetcherAbstraction, url: str, marketplace: str, exception: NotFoundError
 ) -> None:
-    fetcher._logger.info(
+    fetcher.logger.info(
         message="Not found",
         data={"lib": "page_fetcher", "url": url, "marketplace": marketplace},
         exception=exception,
@@ -37,7 +37,7 @@ def log_error(
     ignored_exceptions = (TooManyRequestsError, StopIteration)
 
     if not isinstance(exception, ignored_exceptions):
-        fetcher._logger.info(
+        fetcher.logger.info(
             message="Fetcher error",
             data={"lib": "page_fetcher", "url": url, "marketplace": marketplace},
             exception=exception,
