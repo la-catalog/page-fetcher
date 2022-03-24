@@ -1,4 +1,3 @@
-import os
 import asyncio
 from typing import Iterator
 from page_fetcher.abstractions import Marketplace

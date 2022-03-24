@@ -23,7 +23,6 @@ setup(
     install_requires=[
         "la-catch>=0.0.3",
         "la-headers>=0.0.1",
-        "playwright>=1.18.2",
         "aiohttp[speedups]>=3.8.1",
     ],
     python_requires=">=3.10",
