@@ -40,7 +40,7 @@ class FetcherAbstraction:
     """
 
     def __init__(self, logger):
-        self.logger = logger
+        self._logger = logger
 
     def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         """Pick the expected marketplace fetcher to call the fetch function."""
