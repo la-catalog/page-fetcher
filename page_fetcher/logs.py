@@ -1,22 +1,19 @@
-from page_fetcher.exceptions import (
-    TooManyRequestsError,
-    NotFoundError,
-    UnexpectedStatusError,
-)
+from page_fetcher.exceptions import StatusError
 from page_fetcher.abstractions import FetcherAbstraction
 
 
-def log_not_found(
+def log_status_error(
     fetcher: FetcherAbstraction,
     url: str,
     marketplace: str,
-    exception: NotFoundError,
+    exception: StatusError,
 ) -> None:
 
     fetcher.logger.warning(
-        message="Not found",
+        message="Status error",
         data={
             "lib": "page_fetcher",
+            "status": exception.status,
             "url": url,
             "marketplace": marketplace,
             "extra": exception.extra,
@@ -24,49 +21,11 @@ def log_not_found(
         exception=exception,
     )
 
-    return
+    if exception.status == 404:
+        return
 
-
-def log_too_many_requests(
-    fetcher: FetcherAbstraction,
-    url: str,
-    marketplace: str,
-    exception: TooManyRequestsError,
-) -> None:
-
-    fetcher.logger.warning(
-        message="Too many requests",
-        data={
-            "lib": "page_fetcher",
-            "url": url,
-            "marketplace": marketplace,
-            "extra": exception.extra,
-        },
-        exception=exception,
-    )
-
-    fetcher.cooldown(marketplace)
-
-    raise
-
-
-def log_unexpected_status(
-    fetcher: FetcherAbstraction,
-    url: str,
-    marketplace: str,
-    exception: UnexpectedStatusError,
-) -> None:
-
-    fetcher.logger.warning(
-        message="Unexpected status",
-        data={
-            "lib": "page_fetcher",
-            "url": url,
-            "marketplace": marketplace,
-            "extra": exception.extra,
-        },
-        exception=exception,
-    )
+    if exception.status == 429:
+        fetcher.cooldown(marketplace)
 
     raise
 
@@ -78,9 +37,7 @@ def log_error(
     exception: Exception,
 ) -> None:
 
-    ignored_exceptions = (TooManyRequestsError, StopIteration)
-
-    if not isinstance(exception, ignored_exceptions):
+    if not isinstance(exception, StatusError):
         fetcher.logger.error(
             message="Fetcher error",
             data={

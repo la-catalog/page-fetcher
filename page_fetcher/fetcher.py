@@ -1,26 +1,15 @@
 from typing import Iterator
 from la_catch import catch
 
+from page_fetcher.logs import log_error, log_status_error
 from page_fetcher.options import get_marketplace_fetcher
+from page_fetcher.exceptions import StatusError
 from page_fetcher.abstractions import FetcherAbstraction
-from page_fetcher.logs import (
-    log_error,
-    log_not_found,
-    log_too_many_requests,
-    log_unexpected_status,
-)
-from page_fetcher.exceptions import (
-    NotFoundError,
-    TooManyRequestsError,
-    UnexpectedStatusError,
-)
 
 
 class Fetcher(FetcherAbstraction):
     @catch(Exception, log_error)
-    @catch(NotFoundError, log_not_found)
-    @catch(TooManyRequestsError, log_too_many_requests)
-    @catch(UnexpectedStatusError, log_unexpected_status)
+    @catch(StatusError, log_status_error)
     async def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         fetcher = get_marketplace_fetcher(marketplace)
         contents = await fetcher.fetch(urls)
