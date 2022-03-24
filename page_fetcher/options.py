@@ -4,7 +4,7 @@ from page_fetcher.marketplaces.rihappy import Rihappy
 from page_fetcher.marketplaces.google_shopping import GoogleShopping
 
 options = {
-    "google shopping": GoogleShopping,
+    "google_shopping": GoogleShopping,
     "rihappy": Rihappy,
 }
 

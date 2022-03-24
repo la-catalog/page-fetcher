@@ -1,27 +1,25 @@
 import asyncio
 import unittest
-from unittest import TestCase
+from unittest import IsolatedAsyncioTestCase
 from unittest.mock import MagicMock, AsyncMock, patch
 
 from page_fetcher import Fetcher
 from page_fetcher.options import options
 
 
-class TestCooldown(TestCase):
+class TestCooldown(IsolatedAsyncioTestCase):
     def setUp(self) -> None:
         self.fetcher = Fetcher(MagicMock())
+
         return super().setUp()
 
-    def test_cooldown(
+    @patch("asyncio.sleep", AsyncMock())
+    async def test_cooldown(
         self,
     ) -> None:
-        async def test():
-            await asyncio.gather(
-                self.fetcher.cooldown("google shopping"),
-                self.fetcher.cooldown("rihappy"),
-            )
+        args = [self.fetcher.cooldown(m) for m in options]
 
-        asyncio.run(test())
+        await asyncio.gather(*args)
 
 
 if __name__ == "__main__":
