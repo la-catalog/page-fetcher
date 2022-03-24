@@ -1,6 +1,10 @@
 from typing import Iterator
 
-from page_fetcher.exceptions import NotFoundError, TooManyRequestsError
+from page_fetcher.exceptions import (
+    NotFoundError,
+    TooManyRequestsError,
+    UnexpectedStatusError,
+)
 
 
 class Marketplace:
@@ -21,13 +25,24 @@ class Marketplace:
 
         pass
 
-    def _raise_for_status(self, status) -> None:
-        """React appropriately to specifics responses status."""
+    def _raise_for_status(self, status, extra={}) -> None:
+        """
+        React appropriately to specifics responses status.
 
+        Pass 200 if you fill that yours response is valid
+        independently of the actual status code received.
+        Or don't call the function if you want to implement
+        another logic to the status code.
+        """
+
+        if status is 200:
+            return
         if status is 429:
-            raise TooManyRequestsError()
+            raise TooManyRequestsError(extra)
         elif status is 404:
-            raise NotFoundError()
+            raise NotFoundError(extra)
+
+        raise UnexpectedStatusError(extra)
 
 
 class FetcherAbstraction:

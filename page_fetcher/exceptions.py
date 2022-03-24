@@ -3,8 +3,15 @@ class UnknowMarketplaceError(Exception):
 
 
 class TooManyRequestsError(Exception):
-    pass
+    def __init__(self, extra: dict):
+        self.extra = extra
 
 
 class NotFoundError(Exception):
-    pass
+    def __init__(self, extra: dict):
+        self.extra = extra
+
+
+class UnexpectedStatusError(Exception):
+    def __init__(self, extra: dict):
+        self.extra = extra
