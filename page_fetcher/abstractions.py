@@ -8,12 +8,12 @@ class Marketplace:
     Base class for the marketplaces classes.
     """
 
-    def fetch(self, urls: list[str]) -> Iterator[str]:
+    async def fetch(self, urls: list[str]) -> Iterator[str]:
         """Navegate through urls to return the contents which are intresting to us."""
 
         return iter([])
 
-    def cooldown(self) -> None:
+    async def cooldown(self) -> None:
         """
         Called when the marketplace complains that too many request
         were made, so it should give a little cooldown from requesting.
@@ -42,12 +42,12 @@ class FetcherAbstraction:
     def __init__(self, logger):
         self._logger = logger
 
-    def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
+    async def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         """Pick the expected marketplace fetcher to call the fetch function."""
 
         return iter([])
 
-    def cooldown(self) -> None:
+    async def cooldown(self) -> None:
         """Pick the expected marketplace fetcher to call the cooldown function."""
 
         pass
