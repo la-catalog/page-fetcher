@@ -1,20 +1,30 @@
 import asyncio
 from typing import Iterator
 from aiohttp import ClientSession
+from la_headers import generate_headers
 
 from page_fetcher.abstractions import Marketplace
 
 
 class GoogleShopping(Marketplace):
-    def __init__(self):
-        pass
-
     async def fetch(self, urls: list[str]) -> Iterator[str]:
-        async with ClientSession() as session:
-            async with session.get(urls[0]) as response:
-                self._raise_for_status(response.status)
+        headers = generate_headers("chrome", "99.0", "Linux")
 
-    async def cooldown(self) -> None:
-        print("Google Shopping: cooldown start")
+        async with ClientSession(headers=headers) as session:
+            for url in urls:
+                async with session.get(url) as response:
+                    self.logger.info(
+                        event="Response received",
+                        status=response.status,
+                        url=url,
+                    )
+
+                    self._raise_for_status(response.status)
+                    response.raise_for_status()
+
+                    yield await response.text()
+
+    async def _cooldown(self) -> None:
+        self._logger.debug(event="Start cooldown")
         await asyncio.sleep(5)
-        print("Google Shopping: cooldown end")
+        self._logger.debug(event="End cooldown")

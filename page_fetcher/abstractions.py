@@ -1,7 +1,7 @@
 from typing import Iterator
 from structlog.stdlib import BoundLogger
 
-from page_fetcher.exceptions import StatusError
+from page_fetcher.exceptions import PageNotFoundError
 
 
 class Marketplace:
@@ -9,12 +9,15 @@ class Marketplace:
     Base class for the marketplaces classes.
     """
 
+    def __init__(self, logger: BoundLogger):
+        self._logger = logger
+
     async def fetch(self, urls: list[str]) -> Iterator[str]:
         """Navegate through urls to return the contents which are intresting to us."""
 
         return iter([])
 
-    async def cooldown(self) -> None:
+    async def _cooldown(self) -> None:
         """
         Called when the marketplace complains that too many request
         were made, so it should give a little cooldown from requesting.
@@ -22,13 +25,13 @@ class Marketplace:
 
         pass
 
-    def _raise_for_status(self, status: int, extra: dict = {}) -> None:
-        """Raise error if status is not OK."""
+    async def _raise_for_status(self, status: int) -> None:
+        """Deal with some expected code status."""
 
-        if status is 200:
-            return
-
-        raise StatusError(status, extra)
+        if status is 404:
+            raise PageNotFoundError()
+        elif status is 429:
+            await self._cooldown()
 
 
 class FetcherAbstraction:
@@ -41,14 +44,9 @@ class FetcherAbstraction:
     """
 
     def __init__(self, logger: BoundLogger):
-        self.logger = logger.bind(lib="page_fetcher")
+        self._logger = logger.bind(lib="page_fetcher")
 
     async def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         """Pick the expected marketplace fetcher to call the fetch function."""
 
         return iter([])
-
-    async def cooldown(self) -> None:
-        """Pick the expected marketplace fetcher to call the cooldown function."""
-
-        pass
