@@ -22,7 +22,7 @@ class Marketplace:
 
         pass
 
-    def _raise_for_status(self, status, extra={}) -> None:
+    def _raise_for_status(self, status: int, extra: dict = {}) -> None:
         """Raise error if status is not OK."""
 
         if status is 200:

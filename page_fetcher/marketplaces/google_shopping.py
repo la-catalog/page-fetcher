@@ -1,5 +1,7 @@
 import asyncio
 from typing import Iterator
+from aiohttp import ClientSession
+
 from page_fetcher.abstractions import Marketplace
 
 
@@ -8,7 +10,9 @@ class GoogleShopping(Marketplace):
         pass
 
     async def fetch(self, urls: list[str]) -> Iterator[str]:
-        return super().fetch(urls)
+        async with ClientSession() as session:
+            async with session.get(urls[0]) as response:
+                self._raise_for_status(response.status)
 
     async def cooldown(self) -> None:
         print("Google Shopping: cooldown start")
