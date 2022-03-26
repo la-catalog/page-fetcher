@@ -1,4 +1,5 @@
 from typing import Iterator
+from structlog.stdlib import BoundLogger
 
 from page_fetcher.exceptions import StatusError
 
@@ -39,8 +40,8 @@ class FetcherAbstraction:
     or analysing it. Sometimes it's necessary, but you should think before doing it.
     """
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self, logger: BoundLogger):
+        self.logger = logger.bind(lib="page_fetcher")
 
     async def fetch(self, urls: list[str], marketplace: str) -> Iterator[str]:
         """Pick the expected marketplace fetcher to call the fetch function."""

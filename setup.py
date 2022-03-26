@@ -24,6 +24,7 @@ setup(
         "la-catch>=0.0.3",
         "la-headers>=0.0.1",
         "aiohttp[speedups]>=3.8.1",
+        "structlog>=21.5.0"
     ],
     python_requires=">=3.10",
 )

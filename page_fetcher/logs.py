@@ -4,21 +4,19 @@ from page_fetcher.abstractions import FetcherAbstraction
 
 def log_status_error(
     fetcher: FetcherAbstraction,
-    url: str,
+    urls: str,
     marketplace: str,
     exception: StatusError,
 ) -> None:
 
     fetcher.logger.warning(
-        message="Status error",
+        event="Status error",
         data={
-            "lib": "page_fetcher",
             "status": exception.status,
-            "url": url,
+            "urls": urls,
             "marketplace": marketplace,
             "extra": exception.extra,
-        },
-        exception=exception,
+        }
     )
 
     if exception.status == 404:
@@ -38,14 +36,12 @@ def log_error(
 ) -> None:
 
     if not isinstance(exception, StatusError):
-        fetcher.logger.error(
+        fetcher.logger.exception(
             message="Fetcher error",
             data={
-                "lib": "page_fetcher",
                 "url": url,
                 "marketplace": marketplace,
-            },
-            exception=exception,
+            }
         )
 
     raise
