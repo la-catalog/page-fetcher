@@ -17,14 +17,6 @@ class Marketplace:
 
         return iter([])
 
-    async def _cooldown(self) -> None:
-        """
-        Called when the marketplace complains that too many request
-        were made, so it should give a little cooldown from requesting.
-        """
-
-        pass
-
     async def _raise_for_status(self, status: int) -> None:
         """Deal with some expected code status."""
 
@@ -32,6 +24,14 @@ class Marketplace:
             raise PageNotFoundError()
         elif status is 429:
             await self._cooldown()
+
+    async def _cooldown(self) -> None:
+        """
+        Called when the marketplace complains that too many request
+        were made, so it should give a little cooldown from requesting.
+        """
+
+        pass
 
 
 class FetcherAbstraction:

@@ -4,7 +4,6 @@ from unittest import IsolatedAsyncioTestCase
 from structlog import get_logger
 from unittest.mock import AsyncMock, patch
 
-from page_fetcher import Fetcher
 from page_fetcher.options import options, get_marketplace_fetcher
 
 
