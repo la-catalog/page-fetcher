@@ -20,7 +20,7 @@ class TestCooldown(IsolatedAsyncioTestCase):
 
         for option in options:
             fetcher = get_marketplace_fetcher(option, self._logger)
-            courotines.append(fetcher.cooldown())
+            courotines.append(fetcher._cooldown())
 
         await asyncio.gather(*courotines)
 

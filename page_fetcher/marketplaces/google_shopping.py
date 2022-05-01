@@ -19,12 +19,12 @@ class GoogleShopping(Marketplace):
                         url=url,
                     )
 
-                    self.raise_for_status(response.status)
+                    self._raise_for_status(response.status)
                     response.raise_for_status()
 
                     yield await response.text()
 
-    async def cooldown(self) -> None:
+    async def _cooldown(self) -> None:
         self._logger.debug(event="Start cooldown")
         await asyncio.sleep(5)
         self._logger.debug(event="End cooldown")
