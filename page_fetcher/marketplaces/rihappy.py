@@ -13,10 +13,10 @@ class Rihappy(Marketplace):
         async with ClientSession() as session:
             for url in urls:
                 async with session.get(url) as response:
-                    self._raise_for_status(response.status)
+                    self.raise_for_status(response.status)
                     yield await response.text()
 
-    async def _cooldown(self) -> None:
+    async def cooldown(self) -> None:
         self._logger.debug(event="Start cooldown")
         await asyncio.sleep(1)
         self._logger.debug(event="End cooldown")
