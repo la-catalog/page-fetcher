@@ -1,27 +1,26 @@
 import asyncio
 import unittest
 from unittest import IsolatedAsyncioTestCase
-from structlog import get_logger
 from unittest.mock import AsyncMock, patch
+from structlog.stdlib import get_logger
 
 from page_fetcher.options import options, get_marketplace_fetcher
 
 
 class TestCooldown(IsolatedAsyncioTestCase):
-    def setUp(self) -> None:
-        self._logger = get_logger()
-
     @patch("asyncio.sleep", AsyncMock())
     async def test_cooldown(
         self,
     ) -> None:
-        courotines = []
+        coroutines = []
 
         for option in options:
-            fetcher = get_marketplace_fetcher(option, self._logger)
-            courotines.append(fetcher._cooldown())
+            fetcher = get_marketplace_fetcher(option, get_logger())
+            coroutine = fetcher._cooldown()
 
-        await asyncio.gather(*courotines)
+            coroutines.append(coroutine)
+
+        await asyncio.gather(*coroutines)
 
 
 if __name__ == "__main__":
