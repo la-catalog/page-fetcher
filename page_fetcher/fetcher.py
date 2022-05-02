@@ -27,7 +27,7 @@ class Fetcher:
     
     @catch(Exception, _log_error)
     @catch(PageNotFoundError, ret=None)
-    async def fetch(self, urls: list[str], marketplace: str) -> AsyncGenerator[str, None]:
+    async def fetch(self, urls: list[str], marketplace: str) -> AsyncGenerator[str, str | None]:
         """Call the fetch function from the respective marketplace."""
 
         fetcher = get_marketplace_fetcher(marketplace, self._logger)
