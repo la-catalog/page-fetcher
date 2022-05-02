@@ -11,7 +11,7 @@ class Fetcher:
     Fetcher is responsible for scraping content from pages and dealing
     with unexpected response from the marketplaces.
 
-    It should be focus in collecting the content and not parsing
+    It should be focus on collecting content and not parsing
     or analysing it.
     """
 
