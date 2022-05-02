@@ -31,4 +31,4 @@ class Fetcher:
         """Call the fetch function from the respective marketplace."""
 
         fetcher = get_marketplace_fetcher(marketplace, self._logger)
-        return await fetcher.fetch(urls)
+        return fetcher.fetch(urls)
