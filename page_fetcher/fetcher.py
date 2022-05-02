@@ -12,7 +12,7 @@ class Fetcher:
     with unexpected response from the marketplaces.
 
     It should be focus in collecting the content and not parsing
-    or analysing it. Sometimes it's necessary, but you should think before doing it.
+    or analysing it.
     """
 
     def __init__(self, logger: BoundLogger):
