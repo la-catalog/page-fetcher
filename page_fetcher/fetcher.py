@@ -1,4 +1,4 @@
-from typing import AsyncGenerator
+from typing import Any, AsyncGenerator
 from la_catch import catch
 from structlog.stdlib import BoundLogger
 
@@ -27,8 +27,8 @@ class Fetcher:
     
     @catch(Exception, _log_error)
     @catch(PageNotFoundError, ret=None)
-    async def fetch(self, urls: list[str], marketplace: str) -> AsyncGenerator[str, str | None]:
+    async def fetch(self, urls: list[str], marketplace: str, *args: tuple[Any], **kwargs: dict[str, Any]) -> AsyncGenerator[str, str | None]:
         """Call the fetch function from the respective marketplace."""
 
         fetcher = get_marketplace_fetcher(marketplace, self._logger)
-        return fetcher.fetch(urls)
+        return fetcher.fetch(urls, *args, **kwargs)
