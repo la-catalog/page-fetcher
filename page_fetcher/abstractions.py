@@ -17,7 +17,7 @@ class Marketplace:
     async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
         """
         Navegate through urls to return the contents of each one.
-        New urls can be processed on time using coroutines `send()`.
+        New urls can be processed on time using coroutines `asend()`.
         """
 
         _ = yield await asyncio.sleep(0)
