@@ -11,7 +11,7 @@ class Marketplace:
     Base class for the marketplaces classes.
     """
 
-    def __init__(self, logger: BoundLogger):
+    def __init__(self, logger: BoundLogger) -> None:
         self._logger = logger
 
     async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
