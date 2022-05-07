@@ -1,4 +1,5 @@
-from typing import Any, AsyncGenerator
+from collections.abc import AsyncGenerator
+from typing import Any
 
 from la_catch import catch
 from structlog.stdlib import BoundLogger, get_logger
