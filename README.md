@@ -54,8 +54,6 @@ async def main():
         another_page = pages.asend(url)
         print(another_page)
 
-        
-
 
 asyncio.run(main())
 ```
