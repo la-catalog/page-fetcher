@@ -31,7 +31,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Nem sempre se possui todos os urls no início da chamda a função, por isso é possível utilizar a corrotina para enviar mais páginas a serem processadas.  
+Nem sempre se possui todos os urls no início da chamda da função, por isso é possível enviar para a corrotina urls a serem scrapeados durante a existência dela.  
 
 ```python
 import re
@@ -47,7 +47,7 @@ async def main():
     )
 
     async for page in pages:
-        # fin the url
+        # find url
         ASIN = re.search("data-asin=([A-Z0-9]*)")
         url = f"https://www.amazon.com.br/dp/{ASIN}"
 
