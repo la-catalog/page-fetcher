@@ -1,5 +1,6 @@
 from pathlib import Path
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 long_description = Path("README.md").read_text()
 
@@ -24,7 +25,7 @@ setup(
         "la-catch>=0.0.3",
         "la-headers>=0.0.1",
         "aiohttp[speedups]>=3.8.1",
-        "structlog>=21.5.0"
+        "structlog>=21.5.0",
     ],
     python_requires=">=3.10",
 )
