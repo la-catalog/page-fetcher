@@ -17,7 +17,7 @@ class Fetcher:
     or analysing it.
     """
 
-    def __init__(self, logger: BoundLogger = get_logger()):
+    def __init__(self, logger: BoundLogger = get_logger()) -> None:
         self._logger = logger.bind(lib="page_fetcher")
 
     def _log_error(
