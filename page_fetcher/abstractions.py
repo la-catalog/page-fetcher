@@ -1,5 +1,6 @@
 import asyncio
 from typing import AsyncGenerator
+
 from structlog.stdlib import BoundLogger
 
 from page_fetcher.exceptions import PageNotFoundError

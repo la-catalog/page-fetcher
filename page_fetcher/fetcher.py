@@ -1,9 +1,10 @@
 from typing import Any, AsyncGenerator
+
 from la_catch import catch
 from structlog.stdlib import BoundLogger, get_logger
 
-from page_fetcher.options import get_marketplace_fetcher
 from page_fetcher.exceptions import PageNotFoundError
+from page_fetcher.options import get_marketplace_fetcher
 
 
 class Fetcher:

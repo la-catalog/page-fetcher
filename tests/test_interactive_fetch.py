@@ -2,10 +2,11 @@ import asyncio
 import unittest
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock, patch
-from structlog.stdlib import get_logger
-from page_fetcher.abstractions import Marketplace
 
-from page_fetcher.options import options, get_marketplace_fetcher
+from structlog.stdlib import get_logger
+
+from page_fetcher.abstractions import Marketplace
+from page_fetcher.options import get_marketplace_fetcher, options
 
 
 class TestFetch(IsolatedAsyncioTestCase):
