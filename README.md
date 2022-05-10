@@ -4,7 +4,7 @@ Use esse pacote para pegar a página HTML de um marketplace.
 Esse pacote apenas existe para evitar escrever a mesma lógica de fetch em diversos cron jobs. Não existe regra sobre o que usar para pegar a página HTML, então use a ferramenta que preferir (requests/aiohttp/selenium/pyppeteer/playwright).  
 
 # install
-`pip install la-stopwatch`  
+`pip install git+https://github.com/thiagola92/page-fetcher.git`  
 
 # usage
 
@@ -31,7 +31,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Nem sempre se possui todos os urls no início da chamda da função, por isso é possível enviar para a corrotina urls a serem scrapeados durante a existência dela.  
+Nem sempre se possui todos os urls no início da chamda da função, por isso é possível enviar para o *AsyncGenerator* mais urls a serem scrapeados com `asend()`.  
 
 ```python
 import re
