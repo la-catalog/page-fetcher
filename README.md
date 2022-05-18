@@ -23,7 +23,7 @@ async def main():
         marketplace="google_shopping"
     )
 
-    async for page in pages:
+    async for page, url in pages:
         # do something with the html page
         print(page)
 
@@ -46,12 +46,14 @@ async def main():
         marketplace="amazon"
     )
 
-    async for page in pages:
-        # find url
+    async for page, url in pages:
+        # find another url
         ASIN = re.search("data-asin=([A-Z0-9]*)")
-        url = f"https://www.amazon.com.br/dp/{ASIN}"
 
-        another_page = pages.asend(url)
+        another_url = f"https://www.amazon.com.br/dp/{ASIN}"
+        another_page, another_url = pages.asend(another_url)
+
+        # do something with the html page
         print(another_page)
 
 

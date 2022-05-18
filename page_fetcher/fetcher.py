@@ -1,5 +1,5 @@
 from collections.abc import AsyncGenerator
-from typing import Any
+from typing import Any, Tuple
 
 from la_catch import catch
 from structlog.stdlib import BoundLogger, get_logger
@@ -37,7 +37,7 @@ class Fetcher:
         marketplace: str,
         *args: tuple[Any],
         **kwargs: dict[str, Any],
-    ) -> AsyncGenerator[str, str | None]:
+    ) -> AsyncGenerator[Tuple[str | None, str], str | None]:
         """Call the fetch function from the respective marketplace."""
 
         fetcher = get_marketplace_fetcher(marketplace, self._logger)

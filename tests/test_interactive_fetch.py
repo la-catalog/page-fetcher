@@ -5,8 +5,9 @@ from unittest.mock import AsyncMock, patch
 
 from structlog.stdlib import get_logger
 
+from page_fetcher import Fetcher
 from page_fetcher.abstractions import Marketplace
-from page_fetcher.options import get_marketplace_fetcher, options
+from page_fetcher.options import options
 
 
 class TestFetch(IsolatedAsyncioTestCase):
@@ -17,20 +18,20 @@ class TestFetch(IsolatedAsyncioTestCase):
         urls = ["https://duckduckgo.com/", "https://en.wikipedia.org/"]
         coroutines = []
 
-        for option in options:
-            fetcher = get_marketplace_fetcher(option, get_logger())
-            coroutine = self._interactive_fetch(fetcher, urls)
-
+        for marketplace in options:
+            coroutine = self._interactive_fetch(marketplace, urls)
             coroutines.append(coroutine)
 
         await asyncio.gather(*coroutines)
 
-    async def _interactive_fetch(self, fetcher: Marketplace, urls: list[str]):
-        coroutine = fetcher.fetch(urls[:1])
-        await anext(coroutine)
+    async def _interactive_fetch(self, marketplace: Marketplace, urls: list[str]):
+        fetcher = Fetcher(logger=get_logger())
+        coroutine = await fetcher.fetch(urls=urls[:1], marketplace=marketplace)
+
+        text, url = await anext(coroutine)
 
         for url in urls[1:]:
-            _ = await coroutine.asend(url)
+            text, url = await coroutine.asend(url)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import asyncio
 from collections.abc import AsyncGenerator
+from typing import Tuple
 
 from structlog.stdlib import BoundLogger
 
@@ -14,26 +15,19 @@ class Marketplace:
     def __init__(self, marketplace: str, logger: BoundLogger) -> None:
         self._logger = logger
 
-    async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
+    async def fetch(
+        self, urls: list[str]
+    ) -> AsyncGenerator[Tuple[str | None, str], str | None]:
         """
         Navegate through urls to return the contents of each one.
         New urls can be processed on time using coroutines `asend()`.
+
+        Yields
+            - Tuple with
+                - Text scrapped or None.
+                - URL from text.
+        Sends
+            - URL to scrap or None.
         """
 
-        _ = yield await asyncio.sleep(0)
-
-    async def _raise_for_status(self, status: int) -> None:
-        """Deal with some expected code status."""
-
-        if status is 404:
-            raise PageNotFoundError()
-        elif status is 429:
-            await self._cooldown()
-
-    async def _cooldown(self) -> None:
-        """
-        Called when the marketplace complains that too many request
-        were made, so it should give a little cooldown from requesting.
-        """
-
-        pass
+        _ = yield ("", "")

@@ -21,11 +21,11 @@ class GoogleShopping(Marketplace):
                             url=url,
                         )
 
-                        await self._raise_for_status(response.status)
+                        if response.status == 429:
+                            self._logger.debug(event=f"Start cooldown")
+                            await asyncio.sleep(5)
+
                         response.raise_for_status()
 
-                        url = yield await response.text()
-
-    async def _cooldown(self) -> None:
-        self._logger.debug(event=f"Start cooldown")
-        await asyncio.sleep(5)
+                        text = await response.text()
+                        url = yield (text, url)
