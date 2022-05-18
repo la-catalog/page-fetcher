@@ -4,7 +4,6 @@ from typing import Any, Tuple
 from la_catch import catch
 from structlog.stdlib import BoundLogger, get_logger
 
-from page_fetcher.exceptions import PageNotFoundError
 from page_fetcher.options import get_marketplace_fetcher
 
 
@@ -29,8 +28,9 @@ class Fetcher:
             marketplace=marketplace,
         )
 
+        raise
+
     @catch(Exception, _log_error)
-    @catch(PageNotFoundError, ret=None)
     async def fetch(
         self,
         urls: list[str],
