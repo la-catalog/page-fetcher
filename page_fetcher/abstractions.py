@@ -4,8 +4,6 @@ from typing import Tuple
 
 from structlog.stdlib import BoundLogger
 
-from page_fetcher.exceptions import PageNotFoundError
-
 
 class Marketplace:
     """
@@ -30,4 +28,5 @@ class Marketplace:
             - URL to scrap or None.
         """
 
+        await asyncio.sleep(1)
         _ = yield ("", "")
