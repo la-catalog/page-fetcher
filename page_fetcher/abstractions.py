@@ -11,6 +11,7 @@ class Marketplace:
     """
 
     def __init__(self, marketplace: str, logger: BoundLogger) -> None:
+        self._marketplace = marketplace
         self._logger = logger
 
     async def fetch(
