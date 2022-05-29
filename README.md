@@ -4,7 +4,7 @@ Use esse pacote para pegar a página HTML de um marketplace.
 Esse pacote apenas existe para evitar escrever a mesma lógica de fetch em diversos cron jobs. Não existe regra sobre o que usar para pegar a página HTML, então use a ferramenta que preferir (requests/aiohttp/selenium/pyppeteer/playwright).  
 
 # install
-`pip install git+https://github.com/thiagola92/page-fetcher.git`  
+`pip install git+https://github.com/la-catalog/page-fetcher.git`  
 
 # usage
 
