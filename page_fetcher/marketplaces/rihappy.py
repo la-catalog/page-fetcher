@@ -19,6 +19,7 @@ class Rihappy(Marketplace):
                             event="Response received",
                             status=response.status,
                             url=url,
+                            marketplace=self._marketplace,
                         )
 
                         if response.status == 429:
