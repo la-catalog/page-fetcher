@@ -37,23 +37,7 @@ class Fetcher:
 
         raise
 
-    def _on_fetch_finish(
-        self,
-        urls: list[str],
-        marketplace: str,
-        duration: datetime,
-        *args,
-        **kwargs,
-    ) -> None:
-        self._logger.info(
-            event="Fetcher finish",
-            urls=urls,
-            marketplace=marketplace,
-            duration=str(duration),
-        )
-
     @catch(Exception, _on_fetch_error)
-    @Stopwatch(_on_fetch_finish)
     async def fetch(
         self,
         urls: list[str],

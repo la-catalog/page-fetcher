@@ -3,12 +3,14 @@ from collections.abc import AsyncGenerator
 
 from aiohttp import ClientSession
 from la_headers import generate_random_headers
+from la_stopwatch import Stopwatch
 
 from page_fetcher.abstractions import Marketplace
 
 
 class Rihappy(Marketplace):
     async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
+        stopwatch = Stopwatch()
         headers = generate_random_headers(os=["linux"], browser=["chrome"])
 
         async with ClientSession(headers=headers) as session:
@@ -20,6 +22,7 @@ class Rihappy(Marketplace):
                             status=response.status,
                             url=url,
                             marketplace=self._marketplace,
+                            duration=str(stopwatch),
                         )
 
                         if response.status == 429:
