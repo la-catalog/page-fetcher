@@ -1,0 +1,49 @@
+[project]
+name = "page-fetcher"
+version = "0.1.0"
+description = "Reponsable for getting the content of pages"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "thiagola92", email = "thiagola92@gmail.com"},
+]
+keywords = [
+    "web",
+    "scraper",
+    "crawler"
+]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "la-headers @ git+https://github.com/thiagola92/la-headers",
+    "la-catch>=0.0.5",
+    "la-stopwatch>=0.0.8",
+    "aiohttp[speedups]>=3.8.1",
+    "structlog>=22.1.0",
+]
+
+[project.urls]
+repository = "https://github.com/la-catalog/page-fetcher"
+
+[tool.pdm]
+
+[tool.pdm.scripts]
+tests = "python -m unittest discover -v -f -s tests"
+sort = "python -m isort -v --ac ."
+
+[tool.pdm.dev-dependencies]
+lint = [
+    "black",
+    "isort"
+]
+
+# [[tool.pdm.source]]
+# url = "https://private-site.org/pypi/simple"
+# verify_ssl = false
+# name = "lacatalog"
+
+[build-system]
+requires = ["pdm-pep517>=0.12.0"]
+build-backend = "pdm.pep517.api"
