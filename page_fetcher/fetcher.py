@@ -2,7 +2,7 @@ from collections.abc import AsyncGenerator
 from datetime import datetime
 from typing import Any, Tuple
 
-from la_catch import catch
+from la_catch import Catch
 from la_stopwatch import Stopwatch
 from structlog.stdlib import BoundLogger, get_logger
 
@@ -37,7 +37,7 @@ class Fetcher:
 
         raise
 
-    @catch(Exception, _on_fetch_error)
+    @Catch(Exception, _on_fetch_error)
     async def fetch(
         self,
         urls: list[str],
