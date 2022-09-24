@@ -8,15 +8,16 @@ authors = [
 ]
 dependencies = [
     "la-headers @ git+https://github.com/thiagola92/la-headers",
-    "la-catch>=0.0.5",
-    "la-stopwatch>=0.0.8",
-    "aiohttp[speedups]>=3.8.1",
-    "structlog>=22.1.0",
+    "la-catch==0.0.6",
+    "la-stopwatch==0.0.9",
+    "aiohttp[speedups]==3.8.3",
+    "structlog==22.1.0",
 ]
 
 [project.urls]
 repository = "https://github.com/la-catalog/page-fetcher"
 
+[project.optional-dependencies]
 [tool.pdm]
 
 [tool.pdm.scripts]
@@ -26,8 +27,8 @@ isort = "python -m isort -v --ac ."
 
 [tool.pdm.dev-dependencies]
 lint = [
-    "black",
-    "isort"
+    "black==22.8.0",
+    "isort==5.10.1",
 ]
 
 [build-system]
