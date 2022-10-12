@@ -218,7 +218,7 @@ dependencies = [
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:6843ff84326e1ea23dbd3d34ae47a63b4c5b16eac5c38fd59f277de1a6b4f676"
+content_hash = "sha256:993128f415165197c807350dbc0e11538de923dbb4e1570bad6f35bad06fd1bb"
 
 [metadata.files]
 "aiodns 3.0.0" = [
