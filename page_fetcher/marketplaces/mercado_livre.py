@@ -4,14 +4,15 @@ from typing import Tuple
 
 from aiohttp import ClientSession
 from la_headers import generate_random_headers
+from page_models import URL
 
 from page_fetcher.abstractions import Marketplace
 
 
 class MercadoLivre(Marketplace):
     async def fetch(
-        self, urls: list[str]
-    ) -> AsyncGenerator[Tuple[str | None, str], str | None]:
+        self, urls: list[URL]
+    ) -> AsyncGenerator[Tuple[str | None, URL], URL | None]:
         headers = generate_random_headers(os=["linux"], browser=["chrome"])
 
         async with ClientSession(headers=headers) as session:

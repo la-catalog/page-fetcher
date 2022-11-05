@@ -1,14 +1,18 @@
 import asyncio
 from collections.abc import AsyncGenerator
+from typing import Tuple
 
 from aiohttp import ClientSession
 from la_headers import generate_random_headers
+from page_models import URL
 
 from page_fetcher.abstractions import Marketplace
 
 
 class GoogleShopping(Marketplace):
-    async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
+    async def fetch(
+        self, urls: list[URL]
+    ) -> AsyncGenerator[Tuple[str | None, URL], URL | None]:
         headers = generate_random_headers(os=["linux"], browser=["chrome"])
 
         async with ClientSession(headers=headers) as session:

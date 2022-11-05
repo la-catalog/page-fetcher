@@ -12,6 +12,7 @@ dependencies = [
     "la-stopwatch==0.0.9",
     "aiohttp[speedups]==3.8.3",
     "structlog==22.1.0",
+    "page-models>=0.2.0",
 ]
 
 [project.urls]

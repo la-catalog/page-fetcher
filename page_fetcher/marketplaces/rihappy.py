@@ -1,15 +1,19 @@
 import asyncio
 from collections.abc import AsyncGenerator
+from typing import Tuple
 
 from aiohttp import ClientSession
 from la_headers import generate_random_headers
 from la_stopwatch import Stopwatch
+from page_models import URL
 
 from page_fetcher.abstractions import Marketplace
 
 
 class Rihappy(Marketplace):
-    async def fetch(self, urls: list[str]) -> AsyncGenerator[str, str | None]:
+    async def fetch(
+        self, urls: list[URL]
+    ) -> AsyncGenerator[Tuple[str | None, URL], URL | None]:
         stopwatch = Stopwatch()
         headers = generate_random_headers(os=["linux"], browser=["chrome"])
 
