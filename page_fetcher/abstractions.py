@@ -2,8 +2,8 @@ import asyncio
 from collections.abc import AsyncGenerator
 from typing import Tuple
 
+from logger_utility import RichPoint
 from page_models import URL
-from structlog.stdlib import BoundLogger
 
 
 class Marketplace:
@@ -11,9 +11,9 @@ class Marketplace:
     Base class for the marketplaces classes.
     """
 
-    def __init__(self, marketplace: str, logger: BoundLogger) -> None:
+    def __init__(self, marketplace: str, logger: RichPoint) -> None:
         self._marketplace = marketplace
-        self._logger = logger
+        self._logger = logger.copy().tag("marketplace", marketplace)
 
     async def fetch(
         self, urls: list[str]

@@ -1,4 +1,4 @@
-from structlog.stdlib import BoundLogger
+from logger_utility import RichPoint
 
 from page_fetcher.abstractions import Marketplace
 from page_fetcher.exceptions import UnknowMarketplaceError
@@ -13,11 +13,10 @@ options: dict[str, type[Marketplace]] = {
 }
 
 
-def get_marketplace_fetcher(marketplace: str, logger: BoundLogger) -> Marketplace:
+def get_marketplace_fetcher(marketplace: str, logger: RichPoint) -> Marketplace:
     try:
-        new_logger = logger.bind(marketplace=marketplace)
         marketplace_class = options[marketplace]
-        return marketplace_class(marketplace=marketplace, logger=new_logger)
+        return marketplace_class(marketplace=marketplace, logger=logger)
     except KeyError as e:
         raise UnknowMarketplaceError(
             f"Marketplace '{marketplace}' is not defined in page_fetcher package"

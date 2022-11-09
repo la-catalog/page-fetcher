@@ -4,7 +4,7 @@ from typing import Any, Tuple
 
 from la_catch import Catch
 from la_stopwatch import Stopwatch
-from structlog.stdlib import BoundLogger, get_logger
+from logger_utility import RichPoint
 
 from page_fetcher.options import get_marketplace_fetcher
 
@@ -18,8 +18,8 @@ class Fetcher:
     or analysing it.
     """
 
-    def __init__(self, logger: BoundLogger = get_logger()) -> None:
-        self._logger = logger.bind(lib="page_fetcher")
+    def __init__(self, logger: RichPoint = RichPoint("test")) -> None:
+        self._logger = logger.copy().tag("package", "page_fetcher")
 
     def _on_fetch_error(
         self,
@@ -29,11 +29,9 @@ class Fetcher:
         *args,
         **kwargs,
     ) -> None:
-        self._logger.exception(
-            event="Fetcher error",
-            urls=urls,
-            marketplace=marketplace,
-        )
+        self._logger.copy().tag("event", "fetcher error").tag(
+            "marketplace", marketplace
+        ).field("urls", urls).field("exception", str(exception)).print()
 
         raise
 
