@@ -4,7 +4,7 @@ from typing import Any, Tuple
 
 from la_catch import Catch
 from la_stopwatch import Stopwatch
-from logger_utility import RichPoint
+from logger_utility import WritePoint
 
 from page_fetcher.options import get_marketplace_fetcher
 
@@ -18,7 +18,7 @@ class Fetcher:
     or analysing it.
     """
 
-    def __init__(self, logger: RichPoint = RichPoint("test")) -> None:
+    def __init__(self, logger: WritePoint) -> None:
         self._logger = logger.copy().tag("package", "page_fetcher")
 
     def _on_fetch_error(

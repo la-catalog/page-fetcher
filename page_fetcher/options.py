@@ -1,4 +1,4 @@
-from logger_utility import RichPoint
+from logger_utility import WritePoint
 
 from page_fetcher.abstractions import Marketplace
 from page_fetcher.exceptions import UnknowMarketplaceError
@@ -13,7 +13,7 @@ options: dict[str, type[Marketplace]] = {
 }
 
 
-def get_marketplace_fetcher(marketplace: str, logger: RichPoint) -> Marketplace:
+def get_marketplace_fetcher(marketplace: str, logger: WritePoint) -> Marketplace:
     try:
         marketplace_class = options[marketplace]
         return marketplace_class(marketplace=marketplace, logger=logger)

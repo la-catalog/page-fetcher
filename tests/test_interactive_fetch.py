@@ -3,7 +3,7 @@ import unittest
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock, patch
 
-from logger_utility import RichPoint
+from logger_utility import WritePoint
 
 from page_fetcher import Fetcher
 from page_fetcher.abstractions import Marketplace
@@ -25,7 +25,7 @@ class TestFetch(IsolatedAsyncioTestCase):
         await asyncio.gather(*coroutines)
 
     async def _interactive_fetch(self, marketplace: Marketplace, urls: list[str]):
-        fetcher = Fetcher(logger=RichPoint("test"))
+        fetcher = Fetcher(logger=WritePoint("test", AsyncMock()))
         coroutine = await fetcher.fetch(urls=urls[:1], marketplace=marketplace)
 
         text, url = await anext(coroutine)

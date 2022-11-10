@@ -2,7 +2,7 @@ import asyncio
 from collections.abc import AsyncGenerator
 from typing import Tuple
 
-from logger_utility import RichPoint
+from logger_utility import WritePoint
 from page_models import URL
 
 
@@ -11,7 +11,7 @@ class Marketplace:
     Base class for the marketplaces classes.
     """
 
-    def __init__(self, marketplace: str, logger: RichPoint) -> None:
+    def __init__(self, marketplace: str, logger: WritePoint) -> None:
         self._marketplace = marketplace
         self._logger = logger.copy().tag("marketplace", marketplace)
 

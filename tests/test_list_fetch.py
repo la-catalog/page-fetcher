@@ -3,11 +3,11 @@ import unittest
 from unittest import IsolatedAsyncioTestCase
 from unittest.mock import AsyncMock, patch
 
-from logger_utility import RichPoint
+from logger_utility import WritePoint
 
 from page_fetcher import Fetcher
 from page_fetcher.abstractions import Marketplace
-from page_fetcher.options import get_marketplace_fetcher, options
+from page_fetcher.options import options
 
 
 class TestFetch(IsolatedAsyncioTestCase):
@@ -25,7 +25,7 @@ class TestFetch(IsolatedAsyncioTestCase):
         await asyncio.gather(*coroutines)
 
     async def _list_fetch(self, marketplace: Marketplace, urls: list[str]):
-        fetcher = Fetcher(logger=RichPoint("test"))
+        fetcher = Fetcher(logger=WritePoint("test", AsyncMock()))
         async_gen = await fetcher.fetch(urls=urls, marketplace=marketplace)
 
         async for text, url in async_gen:

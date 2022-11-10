@@ -21,14 +21,23 @@ class MercadoLivre(Marketplace):
             for url in urls:
                 while url:
                     async with session.get(url) as response:
-                        self._logger.copy().tag("event", "response received").field(
-                            "url", url
-                        ).field("status", response.status).field(
-                            "duration", str(stopwatch)
-                        ).print()
+                        (
+                            await self._logger.copy()
+                            .tag("event", "response received")
+                            .field("url", url)
+                            .field("status", response.status)
+                            .field("duration", str(stopwatch))
+                            .print()
+                            .write("scraper")
+                        )
 
                         if response.status == 429:
-                            self._logger.copy().tag("event", "start cooldown")
+                            (
+                                await self._logger.copy()
+                                .tag("event", "start cooldown")
+                                .write("scraper")
+                            )
+
                             await asyncio.sleep(1)
 
                         response.raise_for_status()
