@@ -11,7 +11,7 @@ dependencies = [
     "la-catch==0.0.6",
     "la-stopwatch==0.0.9",
     "aiohttp[speedups]==3.8.3",
-    "page-models>=0.2.0",
+    "page-models==0.2.1",
     "logger-utility==0.1.0",
 ]
 
