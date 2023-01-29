@@ -1,14 +1,20 @@
 {
-    "python.formatting.provider": "black",
-    "python.testing.unittestArgs": [
-        "-v",
-        "-s",
-        "./tests",
-        "-p",
-        "test_*.py"
-    ],
-    "python.testing.pytestEnabled": false,
-    "python.testing.unittestEnabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": false
+  "python.formatting.provider": "black",
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./tests",
+    "-p",
+    "test_*.py"
+  ],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": false,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/__pypackages__/3.11/lib"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/__pypackages__/3.11/lib"
+  ]
 }
