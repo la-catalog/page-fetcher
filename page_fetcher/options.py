@@ -15,7 +15,6 @@ options: dict[str, type[Marketplace]] = {
 
 def get_marketplace_fetcher(marketplace: str, logger: WritePoint) -> Marketplace:
     try:
-        logger = logger.copy().tag("marketplace", marketplace)
         marketplace_class = options[marketplace]
         return marketplace_class(marketplace=marketplace, logger=logger)
     except KeyError as e:
