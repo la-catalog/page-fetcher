@@ -1,9 +1,7 @@
 from collections.abc import AsyncGenerator
-from datetime import datetime
 from typing import Any, Tuple
 
 from la_catch import Catch
-from la_stopwatch import Stopwatch
 from logger_utility import WritePoint
 
 from page_fetcher.options import get_marketplace_fetcher
