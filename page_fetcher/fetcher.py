@@ -43,5 +43,6 @@ class Fetcher:
     ) -> AsyncGenerator[Tuple[str | None, str], str | None]:
         """Call the fetch function from the respective marketplace."""
 
-        fetcher = get_marketplace_fetcher(marketplace, self._logger)
+        logger = self._logger.copy().tag("marketplace", marketplace)
+        fetcher = get_marketplace_fetcher(marketplace, logger)
         return fetcher.fetch(urls, *args, **kwargs)
