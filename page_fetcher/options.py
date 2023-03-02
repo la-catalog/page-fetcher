@@ -21,5 +21,5 @@ def get_marketplace_fetcher(marketplace: str, logger: WritePoint) -> Marketplace
         valid = ", ".join(options.keys())
 
         raise UnknowMarketplaceError(
-            f"Marketplace '{marketplace}' is not defined in page_fetcher package. Valid options: {valid}"
+            f"Marketplace '{marketplace}' is not defined in {__package__} package. Valid options: {valid}"
         ) from e
